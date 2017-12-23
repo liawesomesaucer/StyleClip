@@ -1,0 +1,32 @@
+{
+  "name": "StyleClip",
+  "identifier": "style.clip",
+  "version": "1.0",
+  "description": "A sketch plugin for copying an element's styles to clipboard",
+  "authorEmail": "vincentcliaw@gmail.com",
+  "author": "Vincent Liaw",
+
+  "commands": [
+    {
+      "script": "main.js",
+      "handler": "clipRawCSS",
+      "shortcut": "command shift y",
+      "name": "Clip Raw CSS Styles",
+      "identifier": "style.clip.cliprawcss"
+    },
+    {
+      "script": "main.js",
+      "handler": "createSCSSGlobals",
+      "shortcut": "command shift u",
+      "name": "Create SCSS Color Variables",
+      "identifier": "style.clip.createscssglobals"
+    },
+    {
+      "script": "main.js",
+      "handler": "clipSCSS",
+      "shortcut": "command shift v",
+      "name": "Clip SCSS Styles",
+      "identifier": "style.clip.clipscss"
+    },
+  ],
+}
