@@ -2,7 +2,10 @@
 
 A nimble Sketch plugin that allows copying an element's styles directly to your Mac clipboard. It supports clipboarding raw CSS styles and can create SCSS variable definitions and SCSS styles to match.
 
-Note: Currently this does not support all styles (ie background images, positioning)
+*Note: This is still under development, so not all functionality will work. Currently functional*
+
+* Raw CSS Copies
+* SCSS Global Variable Creation Auto-generation, without the ability for user configuration
 
 ## Installation
 
@@ -17,3 +20,5 @@ You can use the plugin by selecting StyleClip from the Plugins dropdown in the m
 * Cmd + shift + V: Clip SCSS Styles - Copy SCSS styles associated with this element
 
 ## Contributions & Credits
+
+Thanks to Chirag Mehta's project [Name that Color Javascript](http://chir.ag/projects/ntc) for color naming functionality.
