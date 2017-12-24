@@ -24,7 +24,7 @@
     {
       "script": "main.js",
       "handler": "clipSCSS",
-      "shortcut": "command shift v",
+      "shortcut": "command shift i",
       "name": "Clip SCSS Styles",
       "identifier": "style.clip.clipscss"
     },
