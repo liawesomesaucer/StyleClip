@@ -38,6 +38,6 @@ $TURQUOISE-BLUE2: #5DDCE6;
 
 This project was inspired by wanting to reduce the keystrokes necessary when moving from Sketch mockups to SCSS, particularly when having to re-reference colors and variables due to forgetting their names.
 
-Feel free to drop me a line on twitter to [@liawesomesaucer](twitter.com/liawesomesaucer) if you have a question or contribution.
+Feel free to drop me a line on twitter to [@liawesomesaucer](https://twitter.com/liawesomesaucer) if you have a question or contribution.
 
 Thanks to Chirag Mehta's project [Name that Color Javascript](http://chir.ag/projects/ntc) for color naming functionality.
