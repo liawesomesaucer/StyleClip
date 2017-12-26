@@ -26,13 +26,13 @@ Make sure that when using this plugin, you are selecting the root (bottom) eleme
 * RGBA colors are postfixed with a dash and their percentage opacity. For example, `$WHITE-80: rgba(255,255,255,0.80);`
 * Colors that occupy the same variable due to being very close in hex value are postfixed with an index based on their ordering within document color. For example:
 
-If you have differing SCSS preferences, feel free to fork this plugin and adapt it to your own needs.
-
 ```
 $TURQUOISE-BLUE: #5BDCE6;
 $TURQUOISE-BLUE1: #5CDCE6;
 $TURQUOISE-BLUE2: #5DDCE6;
 ```
+
+If you have differing SCSS preferences, feel free to fork this plugin and adapt it to your own needs.
 
 ### Contributions & Credits
 
