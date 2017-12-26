@@ -18,6 +18,21 @@ You can use the plugin by selecting StyleClip from the Plugins dropdown in the m
 
 Make sure that when using this plugin, you are selecting the root (bottom) element containing all the styles that you wish to copy. Selecting layers (folders with contents) might not copy you the styles you want.
 
-## Contributions & Credits
+## Info
+
+### SCSS Conventions
+
+* SCSS Variables are capitalized
+* RGBA colors are postfixed with a dash and their percentage opacity. For example, `$WHITE-80: rgba(255,255,255,0.80);`
+* Colors that occupy the same variable due to being very close in hex value are postfixed with an index based on their ordering within document color. For example:
+
+```
+$TURQUOISE-BLUE: #5BDCE6;
+$TURQUOISE-BLUE1: #5CDCE6;
+$TURQUOISE-BLUE2: #5DDCE6;
+```
+
+
+### Contributions & Credits
 
 Thanks to Chirag Mehta's project [Name that Color Javascript](http://chir.ag/projects/ntc) for color naming functionality.

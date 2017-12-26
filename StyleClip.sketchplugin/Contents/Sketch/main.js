@@ -34,6 +34,10 @@ var createSCSSGlobals = function(context) {
   // Find all existing global and document colors
   var documentColors = context.document.documentData().assets().colors();
 
+  // System to store color usages in case two similar colors are used
+  // with conflicting names
+  var colorsUsage = {};
+
   // Run color generation from ntc to get semantic color names
   var rgba, r, g, b, hex, colorName, line, color;
   var toClip = [];
@@ -47,11 +51,19 @@ var createSCSSGlobals = function(context) {
     hex = convertRgbToHex(r, g, b).toUpperCase();
     colorName = ntc.name(hex)[1].toUpperCase().replace('/', '').replace(' ', '-');
 
-    if (a < 1) { // Handle non-opaque colors
+    // Use hex if opaque, rgba if not opaque
+    // Implicit type cast used due to string
+    if (a != 1) {
       colorName = colorName + '-' + a.slice(2, 4);
       color = generateRgbaString(r, g, b, a);
-    } else {
+    } else { // Opaque color
       color = hex;
+    }
+    // If name for color has been used before, postfix with an index
+    if (colorsUsage[colorName]) {
+      colorName = colorName + colorsUsage[colorName]++;
+    } else {
+      colorsUsage[colorName] = 1;
     }
     line = '$' + colorName + ': ' + color + ';';
     toClip.push(line);
@@ -86,9 +98,7 @@ var clipSCSS = function(context) {
 
   // Create mapping for document colors
   var documentColors = context.document.documentData().assets().colors();
-  // TODO: collapse this into one map
-  var rgbaToNamesMap = createRgbaToNameMap(documentColors);
-  var hexToNamesMap = createHexToNameMap(documentColors);
+  var colorToNameMap = createColorToNameMap(documentColors);
 
   // Get styles
   // The slice is used to remove the default comment that comes with the rectangle
@@ -104,15 +114,15 @@ var clipSCSS = function(context) {
 
     if (matchedHex) {
       hexColor = matchedHex[0].toUpperCase();
-      if (hexToNamesMap[hexColor]) {
-        rawCssAttributes[i] = rawCssAttributes[i].replace(hexColor, '$' + hexToNamesMap[hexColor]);
+      if (colorToNameMap[hexColor]) {
+        rawCssAttributes[i] = rawCssAttributes[i].replace(hexColor, '$' + colorToNameMap[hexColor]);
       }
     }
     if (matchedRgba) {
       // Slice to remove semicolon
       rgbaColor = matchedRgba[0].slice(0, -1);
-      if (rgbaToNamesMap[rgbaColor]) {
-        rawCssAttributes[i] = rawCssAttributes[i].replace(rgbaColor, '$' + rgbaToNamesMap[rgbaColor]);
+      if (colorToNameMap[rgbaColor]) {
+        rawCssAttributes[i] = rawCssAttributes[i].replace(rgbaColor, '$' + colorToNameMap[rgbaColor]);
       }
     }
   }

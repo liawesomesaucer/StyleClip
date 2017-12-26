@@ -38,62 +38,42 @@ var convertRgbToHex = function(r, g, b) {
 /**
  * Converts an array of document colors to a mapping from rgba string to colorName
  */
-var createRgbaToNameMap = function(documentColors) {
+var createColorToNameMap = function(documentColors) {
   var rgba, r, g, b, hex, colorName, color;
   var colorsMap = {};
-  log('createRgbaToNameMap');
+
+  // System to store color usages in case two similar colors are used
+  // with conflicting names
+  var colorsUsage = {};
+
   for (var i = 0; i < documentColors.length; i++) {
     color = documentColors[i].toString();
     rgba = color.slice(1, -1).split(' ');
-    a = rgba[3].split(':')[1];
-
-    // Skip colors that are opaque (would be hex)
-    // Implicit type cast used due to string
-    if (a == 1) {
-      continue;
-    }
 
     r = rgba[0].split(':')[1];
     g = rgba[1].split(':')[1];
     b = rgba[2].split(':')[1];
-
-    hex = convertRgbToHex(r, g, b);
-    colorName = ntc.name(hex)[1].toUpperCase().replace('/', '').replace(' ', '-');
-    if (a < 1) { // Handle non-opaque colors
-      colorName = colorName + '-' + a.slice(2, 4);
-    }
-    color = generateRgbaString(r, g, b, a);
-    colorsMap[color] = colorName;
-    // log(color + ': ' + colorName);
-    log('key: ' + color);
-  }
-  return colorsMap;
-}
-
-/**
- * Converts an array of document colors to mapping from hex string to colorName
- */
-var createHexToNameMap = function(documentColors) {
-  var rgba, r, g, b, hex, colorName, color;
-  var colorsMap = {};
-  for (var i = 0; i < documentColors.length; i++) {
-    color = documentColors[i].toString();
-    rgba = color.slice(1, -1).split(' ');
     a = rgba[3].split(':')[1];
-    
-    // Skip colors that are not opaque (would be rgba)
+
+    // Use hex if opaque, rgba if not opaque
     // Implicit type cast used due to string
-    if (a != 1) {
-      continue;
-    }
-
-    r = rgba[0].split(':')[1];
-    g = rgba[1].split(':')[1];
-    b = rgba[2].split(':')[1];
-
     hex = convertRgbToHex(r, g, b).toUpperCase();
     colorName = ntc.name(hex)[1].toUpperCase().replace('/', '').replace(' ', '-');
-    colorsMap[hex] = colorName;
+    if (a != 1) {
+      colorName = colorName + '-' + a.slice(2, 4);
+      color = generateRgbaString(r, g, b, a);
+    } else { // Opaque color
+      color = hex;
+    }
+    // If name for color has been used before, postfix with an index
+    if (colorsUsage[colorName]) {
+      colorName = colorName + colorsUsage[colorName]++;
+    } else {
+      colorsUsage[colorName] = 1;
+    }
+    colorsMap[color] = colorName;
+    log('key: ' + color);
+    log('colorName: ' + colorName);
   }
   return colorsMap;
 }
