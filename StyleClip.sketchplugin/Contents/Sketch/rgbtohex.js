@@ -56,24 +56,30 @@ var createColorToNameMap = function(documentColors) {
     a = rgba[3].split(':')[1];
 
     // Use hex if opaque, rgba if not opaque
-    // Implicit type cast used due to string
     hex = convertRgbToHex(r, g, b).toUpperCase();
     colorName = ntc.name(hex)[1].toUpperCase().replace('/', '').replace(' ', '-');
     if (a != 1) {
-      colorName = colorName + '-' + a.slice(2, 4);
+      // Temporary map color name to test usage, as we need to create the string differently
+      mapColorName = colorName + '-' + a.slice(2, 4);
       color = generateRgbaString(r, g, b, a);
+      // If name for color has been used before, postfix with an index
+      if (colorsUsage[mapColorName]) {
+        colorName = colorName + colorsUsage[mapColorName] + '-' + a.slice(2, 4);
+      } else {
+        colorName = mapColorName;
+        colorsUsage[mapColorName] = 1;
+      }
     } else { // Opaque color
       color = hex;
+      // If name for color has been used before, postfix with an index
+      if (colorsUsage[colorName]) {
+        colorName = colorName + colorsUsage[colorName]++;
+      } else {
+        colorsUsage[colorName] = 1;
+      }
     }
-    // If name for color has been used before, postfix with an index
-    if (colorsUsage[colorName]) {
-      colorName = colorName + colorsUsage[colorName]++;
-    } else {
-      colorsUsage[colorName] = 1;
-    }
+
     colorsMap[color] = colorName;
-    log('key: ' + color);
-    log('colorName: ' + colorName);
   }
   return colorsMap;
 }
