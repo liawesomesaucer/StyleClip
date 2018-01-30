@@ -12,9 +12,9 @@ Move StyleClip.sketchplugin into your Plugins folder in Sketch or double-click S
 
 You can use the plugin by selecting StyleClip from the Plugins dropdown in the menu bar or using these keyboard shortcuts:
 
-* **Cmd + shift + Y**: Clip Raw CSS Styles - Copy raw CSS associated with this element
-* **Cmd + shift + U**: Clip SCSS Globals - Generates and copies SCSS colors associated used in the current mockup
-* **Cmd + shift + I**: Clip SCSS Styles - Copy SCSS styles associated with this element
+* **Cmd + shift + y**: Clip Raw CSS Styles - Copy raw CSS associated with this element
+* **Cmd + shift + u**: Clip SCSS Globals - Generates and copies SCSS colors associated used in the current mockup
+* **Cmd + shift + i**: Clip SCSS Styles - Copy SCSS styles associated with this element
 
 Make sure that when using this plugin, you are selecting the root (bottom) element containing all the styles that you wish to copy. Selecting layers (folders with contents) might not copy you the styles you want.
 
