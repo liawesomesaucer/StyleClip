@@ -27,6 +27,6 @@
       "shortcut": "command shift i",
       "name": "Clip SCSS Styles",
       "identifier": "style.clip.clipscss"
-    },
-  ],
+    }
+  ]
 }
