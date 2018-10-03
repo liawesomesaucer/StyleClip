@@ -1,7 +1,7 @@
 {
   "name": "StyleClip",
   "identifier": "style.clip",
-  "version": "1.0",
+  "version": "1.1",
   "description": "A sketch plugin for copying an element's styles to clipboard",
   "authorEmail": "vincentcliaw@gmail.com",
   "author": "Vincent Liaw",
