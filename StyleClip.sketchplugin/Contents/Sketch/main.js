@@ -16,7 +16,7 @@ var clipRawCSS = function(context) {
   } else if (selection.count() > 1) {
     doc.showMessage("StyleClip: Please select a single element, not a group");
   } else {
-    var cssAttributes = '' + selection[0].CSSAttributes().slice(1).join('\n');
+    var cssAttributes = '' + selection[0].CSSAttributes().join('\n');
     doc.showMessage("StyleClip: CSS Styles copied to clipboard!");
     [pboard setString:cssAttributes forType:NSPasteboardTypeString];
   }
@@ -110,8 +110,7 @@ var clipSCSS = function(context) {
   var colorToNameMap = createColorToNameMap(documentColors);
 
   // Get styles
-  // The slice is used to remove the default comment that comes with the rectangle
-  var rawCssAttributes = selection[0].CSSAttributes().slice(1);
+  var rawCssAttributes = selection[0].CSSAttributes();
 
   // Match and replace hex and rgba values
   var hexRegex = new RegExp('#[a-fA-F0-9]{6}');
